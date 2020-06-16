@@ -13,10 +13,8 @@ pipeline {
       steps {
         sh 'skopeo --version'
 
-        withCredentials([usernameColonPassword(credentialsId: 'job-registry-secret', variable: 'AUTHFILE')]) {
-          sh "echo ${AUTHFILE} > config-auth.json"
-          sh "ls -l"
-          sh 'skopeo copy --authfile="./config-auth.json" docker://centos:8 docker://image-registry.openshift-image-registry.svc:5000/user1-application/my-image:v1'
+        withCredentials([file(credentialsId: 'platform-operation-mysecret', variable: 'AUTHFILE')]) {
+          sh 'skopeo copy --authfile=$AUTHFILE docker://centos:8 docker://image-registry.openshift-image-registry.svc:5000/user1-application/my-image:v1'
         }
       }
     }
