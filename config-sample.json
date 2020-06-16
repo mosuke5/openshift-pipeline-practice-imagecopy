@@ -1,0 +1,10 @@
+{
+    "auth": {
+        "image-registry.openshift-image-registry.svc:5000": {
+            "username": "serviceaccount",
+            "password": "xxxxx",
+            "email": "serviceaccount@example.org",
+            "auth": "xxxxx"
+        }
+    }
+}

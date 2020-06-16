@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: user1-application
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: user1-operation
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: platform-operation
