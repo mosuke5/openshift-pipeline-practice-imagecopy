@@ -12,13 +12,14 @@ pipeline {
     stage('Import image to ocp registry') {
       steps {
         sh 'skopeo --version'
-
+        
+        // Reference: https://www.jenkins.io/doc/pipeline/steps/credentials-binding/
         withCredentials([file(credentialsId: 'platform-operation-mysecretfile', variable: 'AUTHFILE')]) {
           // value should be masked
           sh "echo ${AUTHFILE}"
 
           // replace your logic
-          sh "skopeo copy --insecure-policy --authfile=${AUTHFILE} docker://centos:8 docker://image-registry.openshift-image-registry.svc:5000/user1-application/my-image:v1"
+          sh "skopeo copy--authfile=${AUTHFILE} --dest-tls-verify=false docker://centos:8 docker://image-registry.openshift-image-registry.svc:5000/user1-application/my-image:v1"
         }
       }
     }
